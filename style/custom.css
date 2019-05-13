@@ -65,6 +65,7 @@ body {
 
 .container-fluid {
 	background-color: #F5F5F5;
+	max-width: none;
 }
 
 th.header, .formtable tbody th, .generalbox th, .generaltable th.header {
