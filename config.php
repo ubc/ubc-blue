@@ -15,242 +15,38 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Configuration for Moodle's nonzero theme.
+ * Moodle's Clean theme, an example of how to make a Bootstrap theme
  *
  * DO NOT MODIFY THIS THEME!
  * COPY IT FIRST, THEN RENAME THE COPY AND MODIFY IT INSTEAD.
  *
  * For full information about creating Moodle themes, see:
- *  http://docs.moodle.org/dev/Themes_2.0
+ * http://docs.moodle.org/dev/Themes_2.0
  *
- * @package   theme_ubc_blue
- * @copyright Mediatouch 2000 (http://mediatouch.it/)
+ * @package   theme_clean
+ * @copyright 2013 Moodle, moodle.org
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 $THEME->name = 'ubc_blue';
-////////////////////////////////////////////////////
-// Name of the theme. Most likely the name of
-// the directory in which this file resides.
-////////////////////////////////////////////////////
 
-
-$THEME->parents = array('canvas','base');
-/////////////////////////////////////////////////////
-// Which existing theme(s) in the /theme/ directory
-// do you want this theme to extend. A theme can
-// extend any number of themes. Rather than
-// creating an entirely new theme and copying all
-// of the CSS, you can simply create a new theme,
-// extend the theme you like and just add the
-// changes you want to your theme.
-////////////////////////////////////////////////////
-
-
-$THEME->parents_exclude_sheets = array(
-    'canvas'=>array(
-        'pagelayout',
-        'tabs',
-        'tables',
-    ),
-);
-////////////////////////////////////////////////////
-// An array of stylesheets not to inherit from the
-// themes parents
-////////////////////////////////////////////////////
-
-
-$THEME->sheets = array('frame'     ,'menu', 'course',
-                       'pagelayout','core', 'calendar',
-                       'tabs'      ,'quiz', 'forum',
-                       'block'     ,'ubc_blue');
-////////////////////////////////////////////////////
-// Name of the stylesheet(s) you've including in
-// this theme's /styles/ directory.
-////////////////////////////////////////////////////
-
-
+/////////////////////////////////
+// The only thing you need to change in this file when copying it to
+// create a new theme is the name above. You also need to change the name
+// in version.php and lang/en/theme_clean.php as well.
+//////////////////////////////////
+//
+$THEME->doctype = 'html5';
+$THEME->parents = array('bootstrapbase');
+$THEME->sheets = array('custom');
+$THEME->yuicssmodules = array();
 $THEME->enable_dock = true;
-////////////////////////////////////////////////////
-// Do you want to use the new navigation dock?
-////////////////////////////////////////////////////
-
-
-$THEME->editor_sheets = array('editor');
-////////////////////////////////////////////////////
-// An array of stylesheets to include within the
-// body of the editor.
-////////////////////////////////////////////////////
-
-
+$THEME->editor_sheets = array();
 $THEME->layouts = array(
     'base' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
-    'standard' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
-    'course' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu'=>true),
-    ),
-    'coursecategory' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
-    'incourse' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
-    'frontpage' => array(
-        'file' => 'frontpage.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu'=>true),
-    ),
-    'admin' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
-    ),
-    'mydashboard' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu'=>true),
-    ),
-    'mypublic' => array(
-        'file' => 'general.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
-    'login' => array(
-        'file' => 'general.php',
-        'regions' => array(),
-        'options' => array('langmenu'=>true),
-    ),
-    // Pages that appear in pop-up windows - no navigation, no blocks, no header.
-    'popup' => array(
-        'file' => 'general.php',
-        'regions' => array(),
-        'options' => array('nofooter'=>true, 'noblocks'=>true, 'nonavbar'=>true, 'nocourseheaderfooter'=>true),
-    ),
-    // No blocks and minimal footer - used for legacy frame layouts only!
-    'frametop' => array(
-        'file' => 'general.php',
-        'regions' => array(),
-        'options' => array('nofooter'=>true, 'nocoursefooter'=>true),
-    ),
-    // Embeded pages, like iframe embeded in moodleform (chat)
-    'embedded' => array(
-        'file' => 'embedded.php',
-        'regions' => array(),
-        'options' => array('nofooter'=>true, 'nonavbar'=>true, 'nocustommenu'=>true, 'nocourseheaderfooter'=>true),
-    ),
-    // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
-    // This must not have any blocks, and it is good idea if it does not have links to
-    // other places - for example there should not be a home link in the footer...
-    'maintenance' => array(
-        'file' => 'general.php',
-        'regions' => array(),
-        'options' => array('nofooter'=>true, 'nonavbar'=>true, 'nocourseheaderfooter'=>true),
-    ),
-    // Should display the content and basic headers only.
-    'print' => array(
-        'file' => 'general.php',
-        'regions' => array(),
-        'options' => array('nofooter'=>true, 'nonavbar'=>false, 'noblocks'=>true, 'nocourseheaderfooter'=>true),
-    ),
-    'report' => array(
-        'file' => 'report.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
+        'file' => 'general.php'
     ),
 );
-///////////////////////////////////////////////////////////////
-// These are all of the possible layouts in Moodle. The
-// simplest way to do this is to keep the theme and file
-// variables the same for every layout. Including them
-// all in this way allows some flexibility down the road
-// if you want to add a different layout template to a
-// specific page.
-///////////////////////////////////////////////////////////////
 
-
-$THEME->csspostprocess = 'ubc_blue_user_settings';
-////////////////////////////////////////////////////
-// Allows the user to provide the name of a function
-// that all CSS should be passed to before being
-// delivered.
-////////////////////////////////////////////////////
-
-
-// $THEME->javascripts
-////////////////////////////////////////////////////
-// An array containing the names of JavaScript files
-// located in /javascript/ to include in the theme.
-// (gets included in the head)
-////////////////////////////////////////////////////
-
-
-// $THEME->javascripts_footer
-////////////////////////////////////////////////////
-// As above but will be included in the page footer.
-////////////////////////////////////////////////////
-
-
-//$THEME->larrow = "&#60";
-////////////////////////////////////////////////////
-// Overrides the left arrow image used throughout
-// Moodle
-////////////////////////////////////////////////////
-
-
-//$THEME->rarrow = "&#62";
-////////////////////////////////////////////////////
-// Overrides the right arrow image used throughout Moodle
-////////////////////////////////////////////////////
-
-
-// $THEME->layouts
-////////////////////////////////////////////////////
-// An array setting the layouts for the theme
-////////////////////////////////////////////////////
-
-
-// $THEME->parents_exclude_javascripts
-////////////////////////////////////////////////////
-// An array of JavaScript files NOT to inherit from
-// the themes parents
-////////////////////////////////////////////////////
-
-
-// $THEME->parents_exclude_sheets
-////////////////////////////////////////////////////
-// An array of stylesheets not to inherit from the
-// themes parents
-////////////////////////////////////////////////////
-
-
-// $THEME->plugins_exclude_sheets
-////////////////////////////////////////////////////
-// An array of plugin sheets to ignore and not
-// include.
-////////////////////////////////////////////////////
-
-
-// $THEME->rendererfactory
-////////////////////////////////////////////////////
-// Sets a custom render factory to use with the
-// theme, used when working with custom renderers.
-////////////////////////////////////////////////////
+$THEME->rendererfactory = 'theme_overridden_renderer_factory';
+$THEME->csspostprocess = 'theme_ubc_blue_process_css';

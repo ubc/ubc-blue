@@ -1,0 +1,143 @@
+/* Custom CSS
+-------------------------*/
+div.logo {
+    background: url([[setting:logo]]) 0 0 no-repeat;
+    display: block;
+    float: left;
+    height: 75px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+img.small-logo {
+    float: left;
+    height: 35px;
+    margin: 3px 10px 3px 0;
+}
+
+@media (max-width: 767px) {
+    img.small-logo {
+        margin: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar img.small-logo {
+        max-width: 150px;
+    }
+    /* Applying accesshide styles */
+    .navbar .small-logo-container + .brand {
+        position: absolute;
+        left: -10000px;
+        font-size: 1em;
+        font-weight: normal;
+    }
+}
+
+.block .header .title {
+	background-image:url([[pix:theme|gradient_h]]);
+	background-repeat:repeat-x;
+	clear:both;
+	line-height:2em;
+	background-color:#E3DFD4;
+}
+
+.block .header h2 {
+	color: black;
+}
+
+.block {
+	border-radius: 0px;
+	border: 1px solid #C6BDA8;
+	padding: 0px;
+}
+
+.block .header .block_action {
+	padding: 0px;
+	padding-right: 3px;
+}
+
+body {
+	background-color: #EFEFEF;
+}
+
+.container-fluid {
+	background-color: #F5F5F5;
+}
+
+th.header, .formtable tbody th, .generalbox th, .generaltable th.header {
+	background-image:url([[pix:theme|gradient_h]]);
+	background-repeat:repeat-x;
+	background-color:#E3DFD4;
+}
+
+a:link {
+	text-decoration:none;
+	color:#3A2894;
+}
+	
+a:visited {
+	text-decoration:none;
+	color:#3A2894;
+}
+
+a:hover {
+	text-decoration:underline;
+	color:black;
+}
+
+a.autolink {
+	text-decoration:underline;
+}
+
+.generaltable {
+	border: 1px solid #C6BDA8;
+}
+
+.block_settings .block_tree .tree_item a:link,
+.block_settings .block_tree .tree_item a:visited,
+.block_settings .block_tree .tree_item a:active,
+.block_navigation .block_tree .tree_item a:link,
+.block_navigation .block_tree .tree_item a:visited,
+.block_navigation .block_tree .tree_item a:active {
+	color:#000;
+}
+
+.block .content {
+    background-color: #F6F6F6;
+}
+
+#page.container-fluid {
+	border: 10px solid transparent;
+	-webkit-border-image: url([[pix:theme|border]]) 17 round; /* Safari 3.1-5 */
+	-o-border-image: url([[pix:theme|border]]) 17 round; /* Opera 11-12.1 */
+	border-image: url([[pix:theme|border]]) 17 round;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 17px;
+	margin-right: 17px;
+}
+
+.page-context-header {
+    background-color: #002859;
+}
+
+.breadcrumb>li>.divider {
+    color: black;
+}
+.page-context-header .page-header-headings h1 {
+    color: white;
+}
+
+h3 {
+	font-size: 1.2em;
+}
+
+h3 {
+	font-size: 1.4em;
+}
+
+/* Custom CSS Settings
+-------------------------*/
+[[setting:customcss]]
