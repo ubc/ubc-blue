@@ -60,6 +60,7 @@ img.small-logo {
 
 body {
 	background-color: #EFEFEF;
+	font-size: 13px;
 }
 
 .container-fluid {
@@ -134,7 +135,7 @@ h3 {
 	font-size: 1.2em;
 }
 
-h3 {
+h2 {
 	font-size: 1.4em;
 }
 
