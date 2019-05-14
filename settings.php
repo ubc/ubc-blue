@@ -1,154 +1,84 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings for the ubc_blue theme
+ * Moodle's Clean theme, an example of how to make a Bootstrap theme
+ *
+ * DO NOT MODIFY THIS THEME!
+ * COPY IT FIRST, THEN RENAME THE COPY AND MODIFY IT INSTEAD.
+ *
+ * For full information about creating Moodle themes, see:
+ * http://docs.moodle.org/dev/Themes_2.0
+ *
+ * @package   theme_clean
+ * @copyright 2013 Moodle, moodle.org
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    // font size reference
-    $name = 'theme_ubc_blue/fontsizereference';
-    $title = get_string('fontsizereference','theme_ubc_blue');
-    $description = get_string('fontsizereferencedesc', 'theme_ubc_blue');
-    $default = '13';
-    $choices = array(11=>'11px', 12=>'12px', 13=>'13px', 14=>'14px', 15=>'15px', 16=>'16px');
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
+
+    // Invert Navbar to dark background.
+    $name = 'theme_ubc_blue/invert';
+    $title = get_string('invert', 'theme_ubc_blue');
+    $description = get_string('invertdesc', 'theme_ubc_blue');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 
-    // moodle 1.* like setting
-    $name = 'theme_ubc_blue/noframe';
-    $title = get_string('noframe','theme_ubc_blue');
-    $description = get_string('noframedesc', 'theme_ubc_blue');
-    $default = '0';
-    $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+    // Logo file setting.
+    $name = 'theme_ubc_blue/logo';
+    $title = get_string('logo','theme_ubc_blue');
+    $description = get_string('logodesc', 'theme_ubc_blue');
+    $setting = new admin_setting_configstoredfile($name, $title, $description, 'logo');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 
-    // Frame margin
-    $name = 'theme_ubc_blue/framemargin';
-    $title = get_string('framemargin','theme_ubc_blue');
-    $description = get_string('framemargindesc', 'theme_ubc_blue', get_string('noframe','theme_ubc_blue'));
-    $default = '15';
-    $choices = array(0=>'0px', 5=>'5px', 10=>'10px', 15=>'15px', 20=>'20px', 25=>'25px', 30=>'30px', 35=>'35px', 40=>'40px', 45=>'45px', 50=>'50px');
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
+    // Small logo file setting.
+    $name = 'theme_ubc_blue/smalllogo';
+    $title = get_string('smalllogo', 'theme_ubc_blue');
+    $description = get_string('smalllogodesc', 'theme_ubc_blue');
+    $setting = new admin_setting_configstoredfile($name, $title, $description, 'smalllogo');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 
-    // Display logo or heading
-    $name = 'theme_ubc_blue/headercontent';
-    $title = get_string('headercontent','theme_ubc_blue');
-    $description = get_string('headercontentdesc', 'theme_ubc_blue');
-    $default = '1';
-    $choices = array(1=>get_string('displaylogo', 'theme_ubc_blue'), 0=>get_string('displayheading', 'theme_ubc_blue'));
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
+    // Show site name along with small logo.
+    $name = 'theme_ubc_blue/sitename';
+    $title = get_string('sitename', 'theme_ubc_blue');
+    $description = get_string('sitenamedesc', 'theme_ubc_blue');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 
-    // Custom site logo setting
-    $name = 'theme_ubc_blue/customlogourl';
-    $title = get_string('customlogourl','theme_ubc_blue');
-    $description = get_string('customlogourldesc', 'theme_ubc_blue');
-    $default = '';
-    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_RAW); // we want it accepting ../ at the beginning. Security is not at its top but Moodle trusts admins.
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Custom front page site logo setting
-    $name = 'theme_ubc_blue/frontpagelogourl';
-    $title = get_string('frontpagelogourl','theme_ubc_blue');
-    $description = get_string('frontpagelogourldesc', 'theme_ubc_blue');
-    $default = '';
-    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_RAW); // we want it accepting ../ at the beginning. Security is not at its top but Moodle trusts admins.
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // page header background colour setting
-    $name = 'theme_ubc_blue/headerbgc';
-    $title = get_string('headerbgc','theme_ubc_blue');
-    $description = get_string('headerbgcdesc', 'theme_ubc_blue');
-    $default = '#002859';
-    $previewconfig = array('selector'=>'#page-header', 'style'=>'backgroundColor');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // creditstomoodleorg: ctmo
-    $name = 'theme_ubc_blue/creditstomoodleorg';
-    $title = get_string('creditstomoodleorg','theme_ubc_blue');
-    $description = get_string('creditstomoodleorgdesc', 'theme_ubc_blue');
-    $default = '2';
-    $choices = array(2 => get_string('ctmo_ineverypage', 'theme_ubc_blue'), 1 => get_string('ctmo_onfrontpageonly', 'theme_ubc_blue'), 0 => get_string('ctmo_no', 'theme_ubc_blue'));
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Block region width
-    $name = 'theme_ubc_blue/blockcolumnwidth';
-    $title = get_string('blockcolumnwidth','theme_ubc_blue');
-    $description = get_string('blockcolumnwidthdesc', 'theme_ubc_blue');
-    $default = '200';
-    $choices = array(150=>'150px', 170=>'170px', 200=>'200px', 240=>'240px', 290=>'290px', 350=>'350px', 420=>'420px');
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Block padding
-    $name = 'theme_ubc_blue/blockpadding';
-    $title = get_string('blockpadding','theme_ubc_blue');
-    $description = get_string('blockpaddingdesc', 'theme_ubc_blue');
-    $default = '8';
-    $choices = array(1=>'1px', 2=>'2px', 4=>'4px', 8=>'8px', 12=>'12px', 16=>'16px');
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Block content background colour setting
-    $name = 'theme_ubc_blue/blockcontentbgc';
-    $title = get_string('blockcontentbgc','theme_ubc_blue');
-    $description = get_string('blockcontentbgcdesc', 'theme_ubc_blue');
-    $default = '#F6F6F6';
-    $previewconfig = array('selector'=>'.block .content', 'style'=>'backgroundColor');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Left column colour setting
-    $name = 'theme_ubc_blue/lblockcolumnbgc';
-    $title = get_string('lblockcolumnbgc','theme_ubc_blue');
-    $description = get_string('lblockcolumnbgcdesc', 'theme_ubc_blue');
-    $default = '#002859';
-    $previewconfig = array('selector'=>'#page-content, #page-content #region-pre, #page-content #region-post-box', 'style'=>'backgroundColor');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Right column colour setting
-    $name = 'theme_ubc_blue/rblockcolumnbgc';
-    $title = get_string('rblockcolumnbgc','theme_ubc_blue');
-    $description = get_string('rblockcolumnbgcdesc', 'theme_ubc_blue');
-    $default = '';
-    $previewconfig = array('selector'=>'#page-content #region-post-box, #page-content #region-post', 'style'=>'backgroundColor');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Foot note setting
-    $name = 'theme_ubc_blue/footnote';
-    $title = get_string('footnote','theme_ubc_blue');
-    $description = get_string('footnotedesc', 'theme_ubc_blue');
-    $default = '';
-    $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Custom CSS file
+    // Custom CSS file.
     $name = 'theme_ubc_blue/customcss';
-    $title = get_string('customcss','theme_ubc_blue');
+    $title = get_string('customcss', 'theme_ubc_blue');
     $description = get_string('customcssdesc', 'theme_ubc_blue');
     $default = '';
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $settings->add($setting);
+
+    // Footnote setting.
+    $name = 'theme_ubc_blue/footnote';
+    $title = get_string('footnote', 'theme_ubc_blue');
+    $description = get_string('footnotedesc', 'theme_ubc_blue');
+    $default = '';
+    $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 }

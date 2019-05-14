@@ -1,205 +1,157 @@
 <?php
-
-defined('MOODLE_INTERNAL') || die();
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Makes our changes to the CSS
+ * Moodle's Clean theme, an example of how to make a Bootstrap theme
  *
- * @param string $css
- * @param theme_config $theme
- * @return string
+ * DO NOT MODIFY THIS THEME!
+ * COPY IT FIRST, THEN RENAME THE COPY AND MODIFY IT INSTEAD.
+ *
+ * For full information about creating Moodle themes, see:
+ * http://docs.moodle.org/dev/Themes_2.0
+ *
+ * @package   theme_clean
+ * @copyright 2013 Moodle, moodle.org
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function ubc_blue_user_settings($css, $theme) {
 
-    // Set the font reference size
-    if (empty($theme->settings->fontsizereference)) {
-        $fontsizereference = '13'; // default
-    } else {
-        $fontsizereference = $theme->settings->fontsizereference;
-    }
-    $css = ubc_blue_set_fontsizereference($css, $fontsizereference);
+/**
+ * Parses CSS before it is cached.
+ *
+ * This function can make alterations and replace patterns within the CSS.
+ *
+ * @param string $css The CSS
+ * @param theme_config $theme The theme config object.
+ * @return string The parsed CSS The parsed CSS.
+ */
+function theme_ubc_blue_process_css($css, $theme) {
+    global $OUTPUT;
 
-    // Set the frame margin
-    if (!isset($theme->settings->framemargin)) {
-        $framemargin = 15; // default
-    } else {
-        $framemargin = $theme->settings->framemargin;
-    }
-    $css = ubc_blue_set_framemargin($css, $framemargin);
+    // Set the background image for the logo.
+    $logo = $OUTPUT->get_logo_url(null, 75);
+    $css = theme_ubc_blue_set_logo($css, $logo);
 
-    // Set the page header background color
-    if (empty($theme->settings->headerbgc)) {
-        $headerbgc = '#002859'; // default
-    } else {
-        $headerbgc = $theme->settings->headerbgc;
-    }
-    $css = ubc_blue_set_headerbgc($css, $headerbgc);
-
-    // Set the block content background color
-    if (empty($theme->settings->blockcontentbgc)) {
-        $blockcontentbgc = '#F6F6F6'; // default
-    } else {
-        $blockcontentbgc = $theme->settings->blockcontentbgc;
-    }
-    $css = ubc_blue_set_blockcontentbgc($css, $blockcontentbgc);
-
-    // Set the left block column background color
-    if (empty($theme->settings->lblockcolumnbgc)) {
-        $lblockcolumnbgc = '#f6f6f6'; // default
-    } else {
-        $lblockcolumnbgc = $theme->settings->lblockcolumnbgc;
-    }
-    $css = ubc_blue_set_lblockcolumnbgc($css, $lblockcolumnbgc);
-
-    // Set the right block column background color
-    if (empty($theme->settings->rblockcolumnbgc)) {
-        $rblockcolumnbgc = $lblockcolumnbgc; // default
-    } else {
-        $rblockcolumnbgc = $theme->settings->rblockcolumnbgc;
-    }
-    $css = ubc_blue_set_rblockcolumnbgc($css, $rblockcolumnbgc);
-
-    // set the width of the two blocks columns
-    if (!empty($theme->settings->blockcolumnwidth)) {
-        $blockcolumnwidth = $theme->settings->blockcolumnwidth;
-    } else {
-        $blockcolumnwidth = '200'; // default
-    }
-    $css = ubc_blue_set_blockcolumnwidth($css, $blockcolumnwidth);
-
-    // set blocks margin
-    if (!empty($theme->settings->blockpadding)) {
-        $blockpadding = $theme->settings->blockpadding;
-    } else {
-        $blockpadding = '8'; // default
-    }
-    $css = ubc_blue_set_blockpadding($css, $blockcolumnwidth, $blockpadding);
-
-    // set the customcss
+    // Set custom CSS.
     if (!empty($theme->settings->customcss)) {
         $customcss = $theme->settings->customcss;
     } else {
         $customcss = null;
     }
-    $css = ubc_blue_set_customcss($css, $customcss);
+    $css = theme_ubc_blue_set_customcss($css, $customcss);
 
     return $css;
 }
-
-
 
 /**
- * Sets the link color variable in CSS
+ * Adds the logo to CSS.
  *
+ * @param string $css The CSS.
+ * @param string $logo The URL of the logo.
+ * @return string The parsed CSS
  */
-function ubc_blue_set_fontsizereference($css, $fontsizereference) {
-    $tag = '[[setting:fontsizereference]]';
-    $css = str_replace($tag, $fontsizereference.'px', $css);
-    return $css;
-}
+function theme_ubc_blue_set_logo($css, $logo) {
+    $tag = '[[setting:logo]]';
+    $replacement = $logo;
+    if (is_null($replacement)) {
+        $replacement = '';
+    }
 
-function ubc_blue_set_framemargin($css, $framemargin) {
-    $tag = '[[setting:framemargin]]';
-    $css = str_replace($tag, $framemargin.'px', $css);
-
-    // Set .headermenu margin
-    $calculated = $framemargin + 22; // 17px is the width of the frame; 5px to avoid to have all stuck
-    $tag = '[[calculated:headermenumargin]]';
-    $css = str_replace($tag, $calculated.'px', $css);
+    $css = str_replace($tag, $replacement, $css);
 
     return $css;
 }
 
-function ubc_blue_set_headerbgc($css, $headerbgc) {
-    $tag = '[[setting:headerbgc]]';
-    $css = str_replace($tag, $headerbgc, $css);
-    return $css;
+/**
+ * Serves any files associated with the theme settings.
+ *
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param context $context
+ * @param string $filearea
+ * @param array $args
+ * @param bool $forcedownload
+ * @param array $options
+ * @return bool
+ */
+function theme_ubc_blue_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+    if ($context->contextlevel == CONTEXT_SYSTEM and ($filearea === 'logo' || $filearea === 'smalllogo')) {
+        $theme = theme_config::load('ubc_blue');
+        // By default, theme files must be cache-able by both browsers and proxies.
+        if (!array_key_exists('cacheability', $options)) {
+            $options['cacheability'] = 'public';
+        }
+        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+    } else {
+        send_file_not_found();
+    }
 }
 
-function ubc_blue_set_blockcontentbgc($css, $blockcontentbgc) {
-    $tag = '[[setting:blockcontentbgc]]';
-    $css = str_replace($tag, $blockcontentbgc, $css);
-    return $css;
-}
-
-function ubc_blue_set_lblockcolumnbgc($css, $lblockcolumnbgc) {
-    $tag = '[[setting:lblockcolumnbgc]]';
-    $css = str_replace($tag, $lblockcolumnbgc, $css);
-    return $css;
-}
-
-function ubc_blue_set_rblockcolumnbgc($css, $rblockcolumnbgc) {
-    $tag = '[[setting:rblockcolumnbgc]]';
-    $css = str_replace($tag, $rblockcolumnbgc, $css);
-    return $css;
-}
-
-function ubc_blue_set_blockcolumnwidth($css, $blockcolumnwidth) {
-    $tag = '[[setting:blockcolumnwidth]]';
-    $css = str_replace($tag, $blockcolumnwidth.'px', $css);
-
-    $calculated = -2*$blockcolumnwidth;
-    $tag = '[[calculated:minusdoubleblockcolumnwidth]]';
-    $css = str_replace($tag, $calculated.'px', $css);
-
-    $calculated = 2*$blockcolumnwidth;
-    $tag = '[[calculated:doubleblockcolumnwidth]]';
-    $css = str_replace($tag, $calculated.'px', $css);
-
-    // set the min-width of the page to provide: content region min-width = block region width
-    // I do not care $framemargin because the min-width applies to #frametop that is free from $framemargin
-    // I need to add twice the width of the frame because it is inside #frametop
-    // (this code here because it HAS TO come later than $blockcolumnwidth definition)
-    $calculated = 3*$blockcolumnwidth + 34; // 34 = 2*17 (17px is the width of the frame)
-    $tag = '[[calculated:minwidth]]';
-    $css = str_replace($tag, $calculated.'px', $css);
-
-    return $css;
-}
-
-function ubc_blue_set_blockpadding($css, $blockcolumnwidth, $blockpadding) {
-    $tag = '[[setting:blockpadding]]';
-    $css = str_replace($tag, $blockpadding.'px', $css);
-
-    // I need to know the field width in pixel because width:100%; and width:auto; don't work as expected
-    // once $blockcolumnwidth and $blockpadding are known, $lb_fieldswidth can be applied
-    // the process has not been optimized at all but it is executed only once
-    $lb_fieldswidth = $blockcolumnwidth;
-
-    // #page-content .region-content {padding:[[setting:blockpadding]] [[setting:blockpadding]] 0 [[setting:blockpadding]];} in pagelayout.css
-    $lb_fieldswidth -= 2*$blockpadding;
-
-    // .block {border:[[static:lb_blockborderwidth]] solid #C6BDA8; [...] }
-    $lb_fieldsborderwidth = 1;
-    $tag = '[[static:lb_blockborderwidth]]'; // It is static, it is not a setting. I just hardcoded its definition here.
-    $css = str_replace($tag, $lb_fieldsborderwidth.'px', $css);
-    $lb_fieldswidth -= 2*$lb_fieldsborderwidth;
-
-    // .block_login .content {padding:[[static:lb_contentpadding]];}
-    $lb_fieldspadding = 4;
-    $tag = '[[static:lb_contentpadding]]'; // It is static, it is not a setting. I just hardcoded its definition here.
-    $css = str_replace($tag, $lb_fieldspadding.'px', $css);
-    $lb_fieldswidth -= 2*$lb_fieldspadding;
-
-    // .block_login #login_username, .block_login #login_password {margin:4px 0 4px [[static:lb_fieldsmargin]];}
-    $lb_fieldsmargin = 14;
-    $tag = '[[static:lb_fieldsmargin]]'; // It is static, it is not a setting. I just hardcoded its definition here.
-    $css = str_replace($tag, $lb_fieldsmargin.'px', $css);
-    $lb_fieldswidth -= $lb_fieldsmargin; // without 2* because it is only left margin
-
-    // fields default factory border: 3px
-    $lb_fieldswidth -= 2*3;
-
-    // leave few pixel on the right reducing once again the field length
-    $lb_fieldswidth -= 12;
-
-    $tag = '[[static:lb_fieldswidth]]';
-    $css = str_replace($tag, $lb_fieldswidth.'px', $css);
-    return $css;
-}
-
-function ubc_blue_set_customcss($css, $customcss) {
+/**
+ * Adds any custom CSS to the CSS before it is cached.
+ *
+ * @param string $css The original CSS.
+ * @param string $customcss The custom CSS to add.
+ * @return string The CSS which now contains our custom CSS.
+ */
+function theme_ubc_blue_set_customcss($css, $customcss) {
     $tag = '[[setting:customcss]]';
-    $css = str_replace($tag, $customcss, $css);
+    $replacement = $customcss;
+    if (is_null($replacement)) {
+        $replacement = '';
+    }
+
+    $css = str_replace($tag, $replacement, $css);
+
     return $css;
+}
+
+/**
+ * Returns an object containing HTML for the areas affected by settings.
+ *
+ * Do not add Clean specific logic in here, child themes should be able to
+ * rely on that function just by declaring settings with similar names.
+ *
+ * @param renderer_base $output Pass in $OUTPUT.
+ * @param moodle_page $page Pass in $PAGE.
+ * @return stdClass An object with the following properties:
+ *      - navbarclass A CSS class to use on the navbar. By default ''.
+ *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
+ *      - footnote HTML to use as a footnote. By default ''.
+ */
+function theme_ubc_blue_get_html_for_settings(renderer_base $output, moodle_page $page) {
+    global $CFG;
+    $return = new stdClass;
+
+    $return->navbarclass = '';
+    if (!empty($page->theme->settings->invert)) {
+        $return->navbarclass .= ' navbar-inverse';
+    }
+
+    // Only display the logo on the front page and login page, if one is defined.
+    if (!empty($page->theme->settings->logo) &&
+            ($page->pagelayout == 'frontpage' || $page->pagelayout == 'login')) {
+        $return->heading = html_writer::tag('div', '', array('class' => 'logo'));
+    } else {
+        $return->heading = $output->page_heading();
+    }
+
+    $return->footnote = '';
+    if (!empty($page->theme->settings->footnote)) {
+        $return->footnote = '<div class="footnote text-center">'.format_text($page->theme->settings->footnote).'</div>';
+    }
+
+    return $return;
 }
