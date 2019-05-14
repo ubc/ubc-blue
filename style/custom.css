@@ -61,6 +61,7 @@ img.small-logo {
 body {
 	background-color: #EFEFEF;
 	font-size: 13px;
+	padding-top: 0px;
 }
 
 .container-fluid {
@@ -111,16 +112,20 @@ a.autolink {
 }
 
 #page.container-fluid {
-	border: 10px solid transparent;
+	border: 17px solid transparent;
 	-webkit-border-image: url([[pix:theme|border]]) 17 round; /* Safari 3.1-5 */
 	-o-border-image: url([[pix:theme|border]]) 17 round; /* Opera 11-12.1 */
 	border-image: url([[pix:theme|border]]) 17 round;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-left: 17px;
-	margin-right: 17px;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin: 15px;
 }
-
+@media (max-width: 500px) {
+	#page.container-fluid {
+		border: none;
+		margin: 0px;
+	}
+}
 .page-context-header {
     background-color: #002859;
 }
@@ -138,6 +143,63 @@ h3 {
 
 h2 {
 	font-size: 1.4em;
+}
+
+#page-footer {
+	border-top: none;
+}
+
+.page-header {
+	margin: 0px;
+}
+
+.breadcrumb-nav {
+	float: none;
+	margin-bottom: 0px;
+	margin-left: 0.8em;
+}
+
+.breadcrumb {
+	padding-left: 0px;
+}
+
+.banner {
+	height: 95px;
+	background-color: #002859;
+	width: 100%;
+	display: table;
+	border-radius: 6px 6px 0px 0px;
+}
+
+.bannerlogo {
+	display: table-cell;
+	border-radius: 6px 6px 0px 0px;
+}
+
+.bannerlogoleft {
+	background-image:url([[pix:theme|logo]]);
+	background-repeat: no-repeat;
+}
+
+.bannerlogoright {
+	text-align: right;
+	vertical-align: top;
+	color: white;
+	width: 305px;
+}
+
+.bannerlogo a {
+	color: yellow;
+}
+
+.bannerlogo .usertour {
+    display: none;
+}
+
+.bannertext {
+	padding-top: 3px;
+    padding-right: 5px;
+    font-size: 90%;
 }
 
 /* Custom CSS Settings

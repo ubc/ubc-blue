@@ -49,6 +49,7 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
+<?php /*
 <header role="banner" class="navbar navbar-fixed-top<?php echo $html->navbarclass ?> moodle-has-zindex">
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
@@ -66,9 +67,36 @@ echo $OUTPUT->doctype() ?>
         </div>
     </nav>
 </header>
+*/?>
 
 <div id="page" class="container-fluid">
-    <?php echo $OUTPUT->full_header(); ?>
+    <?php
+	//echo $OUTPUT->full_header();
+	?>
+	<div class="page-header">
+		<div class="banner">
+			<div class="bannerlogo bannerlogoleft"></div>
+			<?php
+				if($OUTPUT->get_logo_url(305, 95))
+					echo '<div class="bannerlogo bannerlogoright" style="background-image:url(' . $OUTPUT->get_logo_url(305, 95) . ')">';
+				else
+					echo '<div class="bannerlogo bannerlogoright">';
+			?>
+				<div class="bannertext">
+					<?php
+					echo $OUTPUT->login_info();
+					if (($CFG->langmenu) && (!empty($PAGE->layout_options['langmenu']))) {
+						echo $OUTPUT->lang_menu();
+					}
+					echo $PAGE->headingmenu;
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="breadcrumb-nav" role="navigation" aria-label="breadcrumb">
+            <?php echo $OUTPUT->navbar(); ?>
+        </div>
+	</div>
     <div id="page-content" class="row-fluid">
         <div id="region-main-box" class="<?php echo $regionmainbox; ?>">
             <div class="row-fluid">
@@ -87,19 +115,19 @@ echo $OUTPUT->doctype() ?>
     </div>
     <?php echo $OUTPUT->standard_after_main_region_html() ?>
 
-    <footer id="page-footer">
-        <div id="course-footer"><?php echo $OUTPUT->course_footer(); ?></div>
-        <p class="helplink"><?php echo $OUTPUT->page_doc_link(); ?></p>
-        <?php
-        echo $html->footnote;
-        echo $OUTPUT->login_info();
-        echo $OUTPUT->home_link();
-        echo $OUTPUT->standard_footer_html();
-        ?>
-    </footer>
-
-    <?php echo $OUTPUT->standard_end_of_body_html() ?>
-
 </div>
+<footer id="page-footer">
+	<div id="course-footer"><?php echo $OUTPUT->course_footer(); ?></div>
+	<p class="helplink"><?php echo $OUTPUT->page_doc_link(); ?></p>
+	<?php
+	echo $html->footnote;
+	echo $OUTPUT->login_info();
+	echo $OUTPUT->home_link();
+	echo $OUTPUT->standard_footer_html();
+	?>
+</footer>
+
+<?php echo $OUTPUT->standard_end_of_body_html() ?>
+
 </body>
 </html>
