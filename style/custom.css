@@ -120,7 +120,7 @@ a.autolink {
 	padding-right: 0px;
 	margin: 15px;
 }
-@media (max-width: 500px) {
+@media (max-width: 768px) {
 	#page.container-fluid {
 		border: none;
 		margin: 0px;
@@ -200,6 +200,20 @@ h2 {
 	padding-top: 3px;
     padding-right: 5px;
     font-size: 90%;
+}
+
+#dock .dockeditem_container {
+    margin-top: 12px;
+}
+
+#dock {
+	border-right: dashed 1px;
+}
+
+body.has_dock #page {
+    margin-left: 45px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 /* Custom CSS Settings
