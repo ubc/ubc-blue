@@ -16,7 +16,7 @@ img.small-logo {
     margin: 3px 10px 3px 0;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     img.small-logo {
         margin: 3px;
     }
@@ -176,16 +176,22 @@ h2 {
 	border-radius: 6px 6px 0px 0px;
 }
 
-.bannerlogoleft {
-	background-image:url([[pix:theme|logo]]);
-	background-repeat: no-repeat;
-}
-
 .bannerlogoright {
 	text-align: right;
 	vertical-align: top;
 	color: white;
-	width: 305px;
+	background-image: url(/theme/image.php/ubc_blue/theme/1559083186/logo);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-y: center;
+}
+
+@media (max-width: 768px) {
+	.bannerlogoright {
+		background-image: url(/theme/image.php/ubc_blue/theme/1559083186/crest);
+		background-position-x: 20px;
+		background-size: 40px;
+	}
 }
 
 .bannerlogo a {
@@ -202,6 +208,16 @@ h2 {
     font-size: 90%;
 }
 
+.sitenametext {
+    text-transform: uppercase;
+    font-family: "Open Sans";
+    letter-spacing: 3px;
+    font-weight: 600;
+    padding-top: 2px;
+    padding-right: 5px;
+    font-size: 80%;
+}
+
 #dock .dockeditem_container {
     margin-top: 12px;
 }
@@ -215,6 +231,108 @@ body.has_dock #page {
 	padding-left: 0px;
 	padding-right: 0px;
 }
+
+
+/* Login Page
+-------------------------
+
+.loginbox { 
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    box-orient: horizontal;
+	
+	width: 100%;
+	margin: 0px;
+}
+
+.loginpanel { 
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+	width: 50%;
+	
+    border-left: 1px #d4d4d4 solid;
+}
+
+.signuppanel { 
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+	width: 50%;
+}
+
+.loginpanel h2 {
+    display: none;
+}
+
+.subcontent.loginsub:before {
+    content: "Non-UBC Members";
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 5px;
+    padding: 10px;
+    line-height: 50px;
+}
+
+.signuppanel .subcontent h6 {
+	display: none;
+}
+
+.potentialidplist:before {
+    content: "UBC Staff, Faculty, and Students";
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 5px;
+    padding: 10px;
+    line-height: 50px;
+}
+
+
+.subcontent.potentialidps {
+    margin: 5px;
+    padding: 10px;
+}
+
+.potentialidp {
+    margin: 5px;
+    padding: 10px;
+}
+
+.potentialidp .btn {
+    background-image: url([[pix:theme|cwl_login]]);
+    border: none;
+    background-size: cover;
+    width: 83px;
+    height: 35px;
+    padding: 0px;
+}
+
+.potentialidp .btn:hover,
+.potentialidp .btn:focus {
+	background-position: 0px;
+}
+
+@media (max-width: 768px) {
+	.loginbox { 
+		-webkit-box-orient: vertical;
+		-moz-box-orient: vertical;
+		box-orient: vertical;
+	}
+	.loginpanel {
+		width: 100%;		
+		border-left: none;
+		border-top: 1px #d4d4d4 solid;
+	}
+
+	.signuppanel { 
+		width: 100%;		
+	}
+} */
+
 
 /* Custom CSS Settings
 -------------------------*/

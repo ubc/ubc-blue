@@ -41,36 +41,12 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
-<?php /*
-<header role="banner" class="navbar navbar-fixed-top<?php echo $html->navbarclass ?> moodle-has-zindex">
-    <nav role="navigation" class="navbar-inner">
-        <div class="container-fluid">
-            <?php echo $OUTPUT->navbar_home(); ?>
-            <?php echo $OUTPUT->navbar_button(); ?>
-            <?php echo $OUTPUT->user_menu(); ?>
-            <?php echo $OUTPUT->navbar_plugin_output(); ?>
-            <?php echo $OUTPUT->search_box(); ?>
-            <div class="nav-collapse collapse">
-                <?php echo $OUTPUT->custom_menu(); ?>
-                <ul class="nav pull-right">
-                    <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header> 
-*/?>
-
 <div id="page" class="container-fluid">
-    <?php 
-	//echo $OUTPUT->full_header();
-	?>
 	<div class="page-header">
 		<div class="banner">
-			<div class="bannerlogo bannerlogoleft"></div>
 			<?php
-				if($OUTPUT->get_logo_url(305, 95))
-					echo '<div class="bannerlogo bannerlogoright" style="background-image:url(' . $OUTPUT->get_logo_url(305, 95) . ')">';
+				if($OUTPUT->get_logo_url(565, 117))
+					echo '<div class="bannerlogo bannerlogoright" style="background-image:url(' . $OUTPUT->get_logo_url(565, 117) . ')">';
 				else
 					echo '<div class="bannerlogo bannerlogoright">';
 			?>
@@ -81,6 +57,11 @@ echo $OUTPUT->doctype() ?>
 						echo $OUTPUT->lang_menu();
 					}
 					echo $PAGE->headingmenu;
+					?>
+				</div>
+				<div class="sitenametext">
+					<?php
+						echo $SITE->fullname
 					?>
 				</div>
 			</div>
